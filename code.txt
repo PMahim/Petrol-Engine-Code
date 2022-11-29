@@ -1,0 +1,155 @@
+print("performance test on two Stroke Single Cylinder Petrol Engine Test Rig Electrical Loading")
+print("Engine Specifications")
+print("Type:- 2-Stroke petrol Engine Air cooled")
+print("Make: Bajaj")
+print("Rated Power Output: 1.5 HP,1500RPM")
+print("Bore Diameter D: 57mm")
+print("Stroke Length L: 57mm")
+print("Compression Ratio: 7.4  :  1")
+print("Starting: By kick start")
+print("Dia of Orifice: 12 mm")
+print("PROCEDURE:-")
+print("Check the petrol in the Petrol tank")
+print("Allow Petrol start the engine by using hand cranking")
+print("The engine is set to the speed of 1500 RPM")
+print("Apply load from switches given on the panel")
+print("Note down the time taken for particular quantity of fuel consumed by the engine from the burette")
+print("Note down the diff. temperatures")
+print("Repeat the procedure for different loads")
+print("Tabulate the readings as shown in the enclosed sheet")
+print("After the experiment is over keep the Petrol control valve at closed")
+
+
+
+def maxcurrent(bp,ng,v):
+  z=bp*1000*ng/v
+  return z
+v2=[]
+def massflow(t):
+  mf=(10/t)*(0.72/1000)
+  return mf
+def brakepower(t1):
+  bp=(3/t1)*(3200/3600)
+  return bp
+def bsfc(mf,bp):
+  j=(mf*3600)/bp
+  return j
+def brakethermal(bp1,mf1):
+  thermal_eff=(bp1*100)/(mf1*44000)
+  return thermal_eff
+def airfuel(f2):
+  f3=ma/f2
+  return f3
+print("loading switches | N | time-3 blinks | Hw | Quantity | time")
+l0=[]
+msf=[]
+brakep=[]
+thermal=[]
+afr=[]
+bsfc1=[]
+for i in range(0,4):
+  k=[int(a) for a in input().split()]
+  l0.append(k)
+l1=l0[0]
+l2=l0[1]
+l3=l0[2]
+l4=l0[3]
+print("Maximum current(IMAX): ",maxcurrent(1.10,0.8,220),"amphs")
+"""y=massflow(10,57)
+print(round(y,4))"""
+for f in l0:
+  v=f[5]
+  o=massflow(v)
+  msf.append(o)
+a=0
+for s in l0:
+  v1=l0[a][2]
+  a+=1
+  brakep.append(brakepower(v1))
+a1=0
+b1=0
+for i in l0:
+  kill=msf[a1]
+  silk=brakep[b1]
+  a1+=1
+  b1+=1
+  r=brakethermal(silk,kill)
+  thermal.append(r)
+a2=0
+b2=0
+for i in msf:
+  m3=bsfc(msf[a2],brakep[b2])
+  bsfc1.append(m3)
+  a2+=1
+  b2+=1
+pi=22/7
+sv=0.00242
+va=0.0010002
+ma=0.001177
+for i in msf:
+  amm=airfuel(i)
+  afr.append(amm)
+nvol=(va/sv)*100
+v1=[]
+v2=[]
+v3=[]
+v5=[]
+v4=[]
+for i in msf:
+  g=("%.5f" %i)
+  v1.append(g)
+for i in brakep:
+    g1=("%.5f" %i)
+    v2.append(g1)
+for i in thermal:
+    g5=("%.5f"%i)
+    v3.append(g5)
+for i in afr:
+    g3=("%.5f" %i)
+    v4.append(g3)
+for i in bsfc1:
+    g4=("%.5f"%i)
+    v5.append(g4)
+s_volume=[0.00242,0.00242,0.00242,0.00242]
+v_effi=[41.33,41.33,41.33,41.33]
+a_volume=[0.001002,0.001002,0.001002,0.001002]
+mf_air=[0.00177,0.00177,0.00177,0.00177]
+load=[25,50,75,100]
+p1=0
+p2=0
+p3=0
+p4=0
+p5=0
+big=[]
+x2=0
+y2=0
+z2=0
+a3=0
+a4=0
+for i in range(len(v1)):
+    q=v1[p1],v2[p2],v3[p3],v4[p4],v5[p5],s_volume[x2],v_effi[y2],a_volume[z2],mf_air[a3]
+    big.append(q)
+    p1+=1
+    p2+=1
+    p3+=1
+    p4+=1
+    x2+=1
+    y2+=1
+    z2+=1
+    a3+=1
+c1=big[0]
+c2=big[1]
+c3=big[2]
+c4=big[3]
+v6=[c1,c2,c3,c4]
+print ("{:<8} {:<11} {:<15} {:<8} {:<12} {:<15} {:<21} {:<15} {:<15} ".format('Mf_fuel','BrakePower','Bt_effieciency','af_ratio','Bsfc','swept_volume','volumetric_efficiency','actual_volume',"mf_air"))
+for u in v6:
+    u1,u2,u3,u4,u5,u6,u7,u8,u9=u
+    print ("{:<8} {:<11} {:<15} {:<8} {:<12} {:<15} {:<23} {:<15} {:<15} ".format(u1,u2,u3,u4,u5,u6,u7,u8,u9))
+print("RESULTS")
+print("AT FULL LOAD:-")
+print("BRAKE POWER:-",v2[3])
+print("Brake Thermal Efficiency:-",v3[3])
+print("Brake Specific Fuel Consumptions:-",v5[3])
+print("Air fuel Ratio:-",v4[3])
+print("volumetric Efficiency:-",41.33)
